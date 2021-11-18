@@ -140,13 +140,9 @@ def show_following(request):
     for follow in follows:
         targets.append(follow.target)
 
-    all_posts = []
-    for target in targets:
-        posts = Post.objects.filter(creator=target).order_by('-timestamp')
-        all_posts.extend(posts)
-
+    posts = Post.objects.filter(creator__in=targets).order_by('-timestamp')
 
     return render(request, 'network/following.html',{
-        'posts': all_posts,
+        'posts': posts,
 
     })
