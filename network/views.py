@@ -83,3 +83,14 @@ def addPost(request):
 
     #return HttpResponse('post added')
     return JsonResponse(new_post)
+
+def show_profile(request, user_id):
+    user = User.objects.get(pk=user_id)
+
+    posts = Post.objects.filter(creator=user.id)
+
+    return render(request, 'network/profile.html',{
+        'username': user.username,
+        'posts': posts
+    })
+    #return HttpResponse(user_id)
