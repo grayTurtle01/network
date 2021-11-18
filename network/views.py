@@ -1,17 +1,18 @@
 from django.contrib.auth import authenticate, login, logout
 from django.db import IntegrityError
 from django.http import HttpResponse, HttpResponseRedirect
+from django.http.response import JsonResponse
 from django.shortcuts import render
 from django.urls import reverse
 
 from django.views.decorators.csrf import csrf_exempt
 import json
 
-from .models import User
-
+from .models import User, Post
 
 def index(request):
-    return render(request, "network/index.html")
+    posts = Post.objects.all().order_by('-timestamp')
+    return render(request, "network/index.html", {'posts': posts})
 
 
 def login_view(request):
@@ -68,7 +69,17 @@ def register(request):
 @csrf_exempt
 def addPost(request):
     payload = json.loads(request.body)
-    content = payload['content']
-    print(content)
+    message = payload['message']
 
-    return HttpResponse('post added')
+    post = Post.objects.create(creator=request.user, message=message)
+    post.save()
+
+    new_post = {
+        'creator': post.creator.username,
+        'message': message,
+        'timestamp': post.timestamp,
+        'likes': 0
+    }
+
+    #return HttpResponse('post added')
+    return JsonResponse(new_post)

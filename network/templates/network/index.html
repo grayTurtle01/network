@@ -5,10 +5,26 @@
     <h1>All Posts</h1>
 
     <form>
-        <input id="new_post" placeholder="say something">
+        <input id="message" placeholder="say something">
         <button>POST</button>
     </form>
 
+    <div id="posts">
+
+        {% for post in posts %}
+        <div class="post  p-3 m-2 col-lg-4 col-sm-6">
+            <h4>{{ post.creator }}</h4>
+            <a href="#">Edit</a>
+            <p>{{ post.message }}</p>
+            <small class='text-secondary'>{{ post.timestamp }}</small>
+            <br>
+            <span>Likes: {{post.likes }}</span> <br>
+            <a href="#">Comment</a>
+        </div>    
+        {% endfor %}
+        
+    </div>
+    
 {% endblock %}
 
 {% block js %}
