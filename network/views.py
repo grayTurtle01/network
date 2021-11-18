@@ -95,4 +95,14 @@ def show_profile(request, user_id):
         'followers': user.followers,
         'following': user.following
     })
-    #return HttpResponse(user_id)
+
+def show_following(request):
+    
+
+    posts = Post.objects.filter(creator=request.user).order_by('-timestamp')
+
+    return render(request, 'network/following.html',{
+        'posts': posts,
+
+    })
+        
