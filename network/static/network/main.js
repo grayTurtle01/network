@@ -7,8 +7,6 @@ document.querySelector('form').onsubmit = () => {
       'message': message
     })
   })
-  // .then( res => res.text())
-  // .then( msg => console.log(msg))
   
   .then( res => res.json())
   .then( post => {

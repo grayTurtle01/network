@@ -4,10 +4,12 @@
 {% block body %}
     <h1>All Posts</h1>
 
+    {% if user.is_authenticated %}
     <form>
         <input id="message" placeholder="say something">
         <button>POST</button>
     </form>
+    {% endif %}
 
     <div id="posts">
 
@@ -27,8 +29,11 @@
     
 {% endblock %}
 
-{% block js %}
-<script src="{% static 'network/main.js' %}">
 
-</script>
+{% block js%}    
+    {% if user.is_authenticated %}
+        <script src="{% static 'network/main.js' %}">
+        </script>
+    {% endif %}
 {% endblock %}
+    
