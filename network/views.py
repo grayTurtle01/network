@@ -4,6 +4,9 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
 from django.urls import reverse
 
+from django.views.decorators.csrf import csrf_exempt
+import json
+
 from .models import User
 
 
@@ -61,3 +64,11 @@ def register(request):
         return HttpResponseRedirect(reverse("index"))
     else:
         return render(request, "network/register.html")
+
+@csrf_exempt
+def addPost(request):
+    payload = json.loads(request.body)
+    content = payload['content']
+    print(content)
+
+    return HttpResponse('post added')
