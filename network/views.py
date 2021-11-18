@@ -87,7 +87,7 @@ def addPost(request):
 def show_profile(request, user_id):
     user = User.objects.get(pk=user_id)
 
-    posts = Post.objects.filter(creator=user.id)
+    posts = Post.objects.filter(creator=user.id).order_by('-timestamp')
 
     return render(request, 'network/profile.html',{
         'username': user.username,
