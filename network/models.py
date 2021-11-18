@@ -4,7 +4,8 @@ from django.db.models.fields.related import ForeignKey
 
 
 class User(AbstractUser):
-    pass
+    followers = models.IntegerField(default=0)
+    following = models.IntegerField(default=0)
 
 class Post(models.Model):
     creator = models.ForeignKey(User, on_delete=models.CASCADE)

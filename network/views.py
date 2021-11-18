@@ -91,6 +91,8 @@ def show_profile(request, user_id):
 
     return render(request, 'network/profile.html',{
         'username': user.username,
-        'posts': posts
+        'posts': posts,
+        'followers': user.followers,
+        'following': user.following
     })
     #return HttpResponse(user_id)
