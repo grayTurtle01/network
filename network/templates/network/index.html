@@ -1,5 +1,18 @@
 {% extends "network/layout.html" %}
+{% load static %}
 
 {% block body %}
-    TODO
+    <h1>All Posts</h1>
+
+    <form>
+        <input id="new_post" placeholder="say something">
+        <button>POST</button>
+    </form>
+
+{% endblock %}
+
+{% block js %}
+<script src="{% static 'network/main.js' %}">
+
+</script>
 {% endblock %}
