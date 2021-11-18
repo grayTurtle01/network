@@ -109,15 +109,6 @@ def show_profile(request, user_id):
         'is_followed': is_followed
     })
 
-def show_following(request):
-    
-
-    posts = Post.objects.filter(creator=request.user).order_by('-timestamp')
-
-    return render(request, 'network/following.html',{
-        'posts': posts,
-
-    })
         
 def follow_unfollow(request, user_id):
    
@@ -140,3 +131,22 @@ def follow_unfollow(request, user_id):
         return JsonResponse({
             'message': 'follow'
         })
+
+def show_following(request):
+    
+    follows = Follow.objects.filter(creator=request.user)
+
+    targets = []
+    for follow in follows:
+        targets.append(follow.target)
+
+    all_posts = []
+    for target in targets:
+        posts = Post.objects.filter(creator=target).order_by('-timestamp')
+        all_posts.extend(posts)
+
+
+    return render(request, 'network/following.html',{
+        'posts': all_posts,
+
+    })
