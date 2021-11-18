@@ -12,3 +12,7 @@ class Post(models.Model):
     message = models.CharField(max_length=128)
     timestamp = models.DateTimeField(auto_now_add=True)
     likes = models.IntegerField(default=0)
+
+class Follow(models.Model):
+    creator = models.ForeignKey(User, on_delete=models.CASCADE, related_name="creators")
+    target  = models.ForeignKey(User, on_delete=models.CASCADE, related_name="targets")

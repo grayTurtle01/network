@@ -8,7 +8,7 @@ from django.urls import reverse
 from django.views.decorators.csrf import csrf_exempt
 import json
 
-from .models import User, Post
+from .models import Follow, User, Post
 
 def index(request):
     posts = Post.objects.all().order_by('-timestamp')
@@ -85,15 +85,28 @@ def addPost(request):
     return JsonResponse(new_post)
 
 def show_profile(request, user_id):
-    user = User.objects.get(pk=user_id)
+    profile_user = User.objects.get(pk=user_id)
 
-    posts = Post.objects.filter(creator=user.id).order_by('-timestamp')
+    posts = Post.objects.filter(creator=profile_user.id).order_by('-timestamp')
+
+    is_followed = False
+
+    try:
+        follow = Follow.objects.get(creator=request.user,
+                                    target=profile_user)
+        is_followed = True
+
+    except:
+        is_followed = False
+
 
     return render(request, 'network/profile.html',{
-        'username': user.username,
+        'username': profile_user.username,
+        'user_id': user_id,
         'posts': posts,
-        'followers': user.followers,
-        'following': user.following
+        'followers': Follow.objects.filter(target=profile_user.id).count(),
+        'following': Follow.objects.filter(creator=profile_user.id).count(),
+        'is_followed': is_followed
     })
 
 def show_following(request):
@@ -106,3 +119,24 @@ def show_following(request):
 
     })
         
+def follow_unfollow(request, user_id):
+   
+    # Unfollow
+    try:
+        follow = Follow.objects.get(creator=request.user, 
+                                    target=User.objects.get(pk=user_id))
+
+        follow.delete()
+
+        return JsonResponse({
+            'message': 'unfollow'
+         })
+
+    # Follow
+    except:
+        f = Follow(creator=request.user, target=User.objects.get(pk=user_id))
+        f.save()
+
+        return JsonResponse({
+            'message': 'follow'
+        })
