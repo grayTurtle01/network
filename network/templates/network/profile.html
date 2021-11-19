@@ -23,7 +23,7 @@
     <div id="posts">
 
       {% for post in posts %}
-      <div class="post text-left">
+      <div class="post text-left" data-post_id="{{post.id}}">
           <a href="{% url 'show_profile' post.creator.id %}"><h4>{{ post.creator }}</h4></a>
 
           <p>{{ post.message }}</p>
@@ -36,7 +36,10 @@
           <br>
           <small class='text-secondary'>{{ post.timestamp }}</small>
           <br>
-          <span>Likes: {{post.likes }}</span> <br>
+          {% if user.is_authenticated %}
+            <button class="btn btn-sm btn-danger like">Like/Unlike</button>
+          {% endif %}
+          <span class="likes">Likes: {{post.likes }}</span> <br>
           <a href="#">Comment</a>
       </div>    
       {% endfor %}
@@ -52,7 +55,8 @@
       <script src="{% static 'network/follow_unfollow.js' %}"></script>
     {% else %}
       <script src="{% static 'network/edit.js' %}"></script>
-    {% endif %}
+      {% endif %}
+    <script src="{% static 'network/like_unlike.js' %}"></script>
 {% endblock %}
 
     

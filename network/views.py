@@ -8,7 +8,7 @@ from django.urls import reverse
 from django.views.decorators.csrf import csrf_exempt
 import json
 
-from .models import Follow, User, Post
+from .models import Follow, User, Post, Like
 
 def index(request):
     posts = Post.objects.all().order_by('-timestamp')
@@ -164,3 +164,29 @@ def update_post(request):
         
     else:
         return HttpResponse("Invalid User")
+
+@csrf_exempt
+def like_unlike(request):
+    payload = json.loads(request.body)
+
+    post_id = int(payload['post_id'])
+  
+    post = Post.objects.get(pk=post_id)
+
+    try:
+        like = Like.objects.get(creator=request.user, target=post.creator, post_id=post_id)
+        like.delete()
+        post.likes += -1
+        post.save()
+        return JsonResponse({'likes': post.likes})
+    except:
+        like = Like(creator=request.user, target=post.creator, post_id=post_id)
+        like.save()
+        post.likes += 1
+        post.save()
+        return JsonResponse({'likes': post.likes})
+
+    #post.save()
+
+        
+    

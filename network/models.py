@@ -19,3 +19,8 @@ class Post(models.Model):
 class Follow(models.Model):
     creator = models.ForeignKey(User, on_delete=models.CASCADE, related_name="creators")
     target  = models.ForeignKey(User, on_delete=models.CASCADE, related_name="targets")
+
+class Like(models.Model):
+    creator = models.ForeignKey(User, on_delete=models.CASCADE, related_name="sources")
+    target  = models.ForeignKey(User, on_delete=models.CASCADE, related_name="destinies")
+    post_id = models.IntegerField(default=0)
