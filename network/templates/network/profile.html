@@ -22,25 +22,37 @@
 
     <div id="posts">
 
-        {% for post in posts %}
-        <div class="post text-left">
-            <h4>{{ post.creator }}</h4>
-            <a href="#">Edit</a>
-            <p>{{ post.message }}</p>
-            <small class='text-secondary'>{{ post.timestamp }}</small>
-            <br>
-            <span>Likes: {{post.likes }}</span> <br>
-            <a href="#">Comment</a>
-        </div>    
-        {% endfor %}
-        
-    </div>
+      {% for post in posts %}
+      <div class="post text-left">
+          <a href="{% url 'show_profile' post.creator.id %}"><h4>{{ post.creator }}</h4></a>
+
+          <p>{{ post.message }}</p>
+          <textarea style="display: none;"></textarea>
+          <button style="display: none;" class="btn btn-sm btn-info mt-1">Update</button>
+
+          {% if post.creator == user %}
+              <a class="btn btn-sm btn-info edit" data-post_id="{{post.id}}">Edit</a>
+          {% endif %}
+          <br>
+          <small class='text-secondary'>{{ post.timestamp }}</small>
+          <br>
+          <span>Likes: {{post.likes }}</span> <br>
+          <a href="#">Comment</a>
+      </div>    
+      {% endfor %}
+      
+  </div>
+  
     
     
     {% endblock %}
     
 {% block js %}
-    <script src="{% static 'network/profile.js' %}"></script>      
+    {% if user.username != username %}
+      <script src="{% static 'network/follow_unfollow.js' %}"></script>
+    {% else %}
+      <script src="{% static 'network/edit.js' %}"></script>
+    {% endif %}
 {% endblock %}
 
     

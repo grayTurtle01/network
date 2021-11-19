@@ -1,40 +1,3 @@
-document.querySelector('form').onsubmit = () => {
-  let message = document.querySelector('#message').value
-  
-  fetch("/addPost", {
-    method: 'POST',
-    body: JSON.stringify({
-      'message': message
-    })
-  })
-  
-  .then( res => res.json())
-  .then( post => {
-    div = document.createElement('div')
-    div.className = 'post text-left'
-    div.innerHTML = `
-      <h4>${post.creator }</h4>
-      <p>${ post.message }</p>
-      <a class="btn btn-sm btn-info edit"">Edit</a>
-      <br>
-
-      <textarea style="display: none;"></textarea>
-      <button style="display: none;" class="btn btn-sm btn-info mt-1">Update</button>
-
-      <small class='text-secondary'>${ post.timestamp }</small>
-      <br>
-      <span>Likes: ${post.likes }</span> <br>
-      <a href="#">Comment</a> 
-    `
-    document.querySelector('#posts').prepend(div)
-    document.querySelector('#message').value = ""
-  })
-  
-
-
-  return false
-}
-
 edit_buttons = document.querySelectorAll('.edit')
 for (button of edit_buttons){
     button.onclick = function(){
@@ -52,6 +15,7 @@ for (button of edit_buttons){
       p.style.display = 'none'
 
       edit_area.style.display = 'block'
+      edit_area.focus()
 
       update_btn = post.querySelector('button')
       update_btn.style.display = 'inline'

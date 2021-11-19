@@ -13,6 +13,9 @@ class Post(models.Model):
     timestamp = models.DateTimeField(auto_now_add=True)
     likes = models.IntegerField(default=0)
 
+    def __str__(self):
+        return f"{self.message} | {self.creator}"
+        
 class Follow(models.Model):
     creator = models.ForeignKey(User, on_delete=models.CASCADE, related_name="creators")
     target  = models.ForeignKey(User, on_delete=models.CASCADE, related_name="targets")
