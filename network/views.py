@@ -161,5 +161,6 @@ def update_post(request):
         post.save()
 
         return HttpResponse("Post updated")
+        
     else:
         return HttpResponse("Invalid User")
