@@ -16,7 +16,11 @@
         {% for post in posts %}
         <div class="post text-left">
             <a href="{% url 'show_profile' post.creator.id %}"><h4>{{ post.creator }}</h4></a>
-            <a href="#">Edit</a>
+
+            {% if post.creator == user %}
+                <a class="btn btn-sm btn-info edit" data-post_id="{{post.id}}">Edit</a>
+            {% endif %}
+
             <p>{{ post.message }}</p>
             <small class='text-secondary'>{{ post.timestamp }}</small>
             <br>

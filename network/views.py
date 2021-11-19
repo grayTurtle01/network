@@ -146,3 +146,16 @@ def show_following(request):
         'posts': posts,
 
     })
+
+@csrf_exempt
+def update_post(request):
+    payload = json.loads(request.body)
+
+    post_id = payload['post_id']
+    new_message = payload['new_message']
+
+    post = Post.objects.get(pk=post_id)
+    post.message = new_message
+    post.save()
+
+    return HttpResponse("Post updated")
