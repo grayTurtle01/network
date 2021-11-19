@@ -155,7 +155,11 @@ def update_post(request):
     new_message = payload['new_message']
 
     post = Post.objects.get(pk=post_id)
-    post.message = new_message
-    post.save()
 
-    return HttpResponse("Post updated")
+    if request.user == post.creator:
+        post.message = new_message
+        post.save()
+
+        return HttpResponse("Post updated")
+    else:
+        return HttpResponse("Invalid User")
