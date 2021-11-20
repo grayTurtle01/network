@@ -14,7 +14,15 @@ for( like_btn of like_buttons ){
     .then( data => {
       likes = post.querySelector('.likes')
       likes.innerText = `Likes: ${data.likes}`
+      if( data.message == "Like added"){
+        this.innerText = 'Unlike'
+      }
+      else{
+        this.innerText = 'Like'
+      }
+
     } )
+   
     
   }
 }

@@ -12,7 +12,23 @@ from .models import Follow, User, Post, Like
 
 def index(request):
     posts = Post.objects.all().order_by('-timestamp')
-    return render(request, "network/index.html", {'posts': posts})
+
+    try:
+        likes_given = Like.objects.filter(creator=request.user)
+    
+    # Anonymus user
+    except:
+        likes_given = []
+
+    posts_liked = []
+    for like in likes_given:
+        post_id = like.post_id
+        posts_liked.append(post_id)
+
+    return render(request, "network/index.html", {
+                                'posts': posts,
+                                'posts_liked': posts_liked
+                            })
 
 
 def login_view(request):
@@ -89,6 +105,7 @@ def show_profile(request, user_id):
 
     posts = Post.objects.filter(creator=profile_user.id).order_by('-timestamp')
 
+    # Follow
     is_followed = False
 
     try:
@@ -99,6 +116,16 @@ def show_profile(request, user_id):
     except:
         is_followed = False
 
+    # Likes
+    try:
+        likes_given = Like.objects.filter(creator=request.user)
+    except:
+        likes_given = []
+
+    posts_liked = []
+    for like in likes_given:
+        post_id = like.post_id
+        posts_liked.append(post_id)
 
     return render(request, 'network/profile.html',{
         'username': profile_user.username,
@@ -106,7 +133,8 @@ def show_profile(request, user_id):
         'posts': posts,
         'followers': Follow.objects.filter(target=profile_user.id).count(),
         'following': Follow.objects.filter(creator=profile_user.id).count(),
-        'is_followed': is_followed
+        'is_followed': is_followed,
+        'posts_liked' : posts_liked
     })
 
         
@@ -142,8 +170,18 @@ def show_following(request):
 
     posts = Post.objects.filter(creator__in=targets).order_by('-timestamp')
 
+    # Likes
+    likes_given = Like.objects.filter(creator=request.user)
+    
+    posts_liked = []
+    for like in likes_given:
+        post_id = like.post_id
+        posts_liked.append(post_id)
+
+
     return render(request, 'network/following.html',{
         'posts': posts,
+        'posts_liked': posts_liked
 
     })
 
@@ -178,15 +216,19 @@ def like_unlike(request):
         like.delete()
         post.likes += -1
         post.save()
-        return JsonResponse({'likes': post.likes})
+        return JsonResponse({'likes': post.likes,
+                             'message': "Like removed"})
+        
     except:
         like = Like(creator=request.user, target=post.creator, post_id=post_id)
         like.save()
         post.likes += 1
         post.save()
-        return JsonResponse({'likes': post.likes})
+        return JsonResponse({'likes': post.likes,
+                             'message': "Like added"})
+       
 
-    #post.save()
+    
 
         
     

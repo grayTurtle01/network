@@ -38,10 +38,18 @@
           <br>
           <small class='text-secondary'>{{ post.timestamp }}</small>
           <br>
+
           {% if user.is_authenticated %}
-            <button class="btn btn-sm btn-danger like">Like/Unlike</button>
-          {% endif %}
-          <span class="likes">Likes: {{post.likes }}</span> <br>
+                <button class="btn btn-sm btn-danger like" style="width:60px">
+                {% if post.id in posts_liked %}
+                    Unlike
+                {% else %}
+                    Like
+                {% endif %}
+                </button>
+            {% endif %}
+            <span class="likes">Likes: {{post.likes }}</span> <br>
+            
           <a href="#">Comment</a>
       </div>    
       {% endfor %}
