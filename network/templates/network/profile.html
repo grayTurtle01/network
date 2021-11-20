@@ -8,16 +8,18 @@
       <li>Following: {{following}}</li>
     </ul>
 
-    {% if user.username != username %}
-      <button id="follow_unfollow" 
-         data-profile_id="{{user_id}}" 
-         class="btn btn-sm btn-primary">
-        {% if is_followed %}
-          Unfollow
-        {% else %}
-          Follow
-        {% endif %}  
-      </button>
+    {% if user.is_authenticated %}
+      {% if user.username != username %}
+        <button id="follow_unfollow" 
+          data-profile_id="{{user_id}}" 
+          class="btn btn-md btn-dark rounded-pill" style="width: 100px;">
+          {% if is_followed %}
+            Unfollow
+          {% else %}
+            Follow
+          {% endif %}  
+        </button>
+      {% endif %}
     {% endif %}
 
     <div id="posts">
@@ -51,12 +53,14 @@
     {% endblock %}
     
 {% block js %}
+  {% if user.is_authenticated %}
     {% if user.username != username %}
       <script src="{% static 'network/follow_unfollow.js' %}"></script>
     {% else %}
       <script src="{% static 'network/edit.js' %}"></script>
       {% endif %}
     <script src="{% static 'network/like_unlike.js' %}"></script>
+  {% endif %}
 {% endblock %}
 
     
