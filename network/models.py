@@ -15,6 +15,15 @@ class Post(models.Model):
 
     def __str__(self):
         return f"{self.message} | {self.creator}"
+    
+    def serialize(self):
+        return{
+            'id': self.id,
+            'creator': self.creator,
+            'message': self.message,
+            'timestamp': self.timestamp,
+            'likes': self.likes
+        }
         
 class Follow(models.Model):
     creator = models.ForeignKey(User, on_delete=models.CASCADE, related_name="creators")

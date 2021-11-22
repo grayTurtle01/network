@@ -12,10 +12,12 @@ from .models import Follow, User, Post, Like
 
 from django.core.paginator import Paginator
 
+post_by_page = 2
+
 def index(request):
     posts = Post.objects.all().order_by('-timestamp')
 
-    p = Paginator(posts, 2)
+    p = Paginator(posts, post_by_page)
     page1 = p.page(1)
 
     try:
@@ -33,7 +35,8 @@ def index(request):
     return render(request, "network/index.html", {
                                 #'posts': posts,
                                 'posts': page1.object_list,
-                                'posts_liked': posts_liked
+                                'posts_liked': posts_liked,
+                                'range': p.page_range
                             })
 
 
@@ -237,7 +240,7 @@ def like_unlike(request):
 def render_page_number(request, page_number):
     posts = Post.objects.all().order_by('-timestamp')
 
-    p = Paginator(posts, 2)
+    p = Paginator(posts, post_by_page)
     page1 = p.page(page_number)
     pages = p.num_pages
 
@@ -261,6 +264,18 @@ def render_page_number(request, page_number):
                                 'range': p.page_range
                             })    
 
+
+
+def get_posts(request, page_number):
+    print(' --> conection')
+    posts = Post.objects.all().order_by('-timestamp')
+
+    p = Paginator(posts, post_by_page)
+    page = p.page(page_number)
+
+    posts = list(page.object_list)
+
+    return JsonResponse({'posts': posts})
 
     
 

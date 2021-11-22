@@ -48,11 +48,17 @@
 
     <nav aria-label="Page navigation example">
         <ul class="pagination">
-          <li class="page-item"><a class="page-link" href="#">Previous</a></li>
+          <li class="page-item previous">
+              <a class="page-link" href="/render_page_number/">Previous</a>
+        </li>
           {% for i in range %}
-             <li class="page-item"><a class="page-link" href="/render_page_number/{{i}}">{{i}}</a></li>
+             <li class="page-item page-number" data-page_number="{{i}}" >
+                 <a class="page-link" href="/render_page_number/{{i}}">{{i}}</a>
+            </li>
           {% endfor%}
-          <li class="page-item"><a class="page-link" href="#">Next</a></li>
+          <li class="page-item">
+              <a class="page-link next" href="/render_page_number/{{2}}">Next</a>
+            </li>
         </ul>
       </nav>
 
@@ -64,5 +70,7 @@
         <script src="{% static 'network/main.js' %}"></script>
         <script src="{% static 'network/like_unlike.js' %}"></script>
     {% endif %}
+        
+    <script src="{% static 'network/paginator.js' %}"></script>
 {% endblock %}
     
