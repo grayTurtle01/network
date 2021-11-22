@@ -169,7 +169,7 @@ def follow_unfollow(request, user_id):
             'message': 'follow'
         })
 
-def show_following(request):
+def following(request, page_number):
     
     follows = Follow.objects.filter(creator=request.user)
 
@@ -178,6 +178,11 @@ def show_following(request):
         targets.append(follow.target)
 
     posts = Post.objects.filter(creator__in=targets).order_by('-timestamp')
+
+    #Paginator
+    p = Paginator(posts, post_by_page)
+    #page_number = 1
+    page = p.page(page_number)
 
     # Likes
     likes_given = Like.objects.filter(creator=request.user)
@@ -189,8 +194,9 @@ def show_following(request):
 
 
     return render(request, 'network/following.html',{
-        'posts': posts,
-        'posts_liked': posts_liked
+        'posts': page.object_list,
+        'posts_liked': posts_liked,
+        'range': p.page_range
 
     })
 
