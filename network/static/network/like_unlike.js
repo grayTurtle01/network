@@ -12,13 +12,21 @@ for( like_btn of like_buttons ){
     })
     .then( res => res.json())
     .then( data => {
+      // likes = post.querySelector('.likes')
+      // likes.innerText = `Likes: ${data.likes}`
+      // if( data.message == "Like added"){
+      //   this.innerText = 'Unlike'
+      // }
+      // else{
+      //   this.innerText = 'Like'
+      // }
       likes = post.querySelector('.likes')
-      likes.innerText = `Likes: ${data.likes}`
+      likes.innerText = data.likes
       if( data.message == "Like added"){
-        this.innerText = 'Unlike'
+        this.style.color = 'red'
       }
       else{
-        this.innerText = 'Like'
+        this.style.color = 'black'
       }
 
     } )

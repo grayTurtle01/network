@@ -40,19 +40,19 @@
           <br>
           <small class='text-secondary'>{{ post.timestamp }}</small>
           <br>
-
           {% if user.is_authenticated %}
-                <button class="btn btn-sm btn-danger like" style="width:60px">
-                {% if post.id in posts_liked %}
-                    Unlike
-                {% else %}
-                    Like
-                {% endif %}
-                </button>
+
+            {% if post.id in posts_liked %}
+                <i class="fa fa-heart like" style="color:red"></i>    
+            {% else %}    
+                <i class="fa fa-heart like" style="color:black"></i>    
             {% endif %}
-            <span class="likes">Likes: {{post.likes }}</span> <br>
+
+        {% else %}
+            <i class="fa fa-heart like" style="color:black"></i>   
+        {% endif %}
+        <span class="likes">{{post.likes }}</span> <br>
             
-          <a href="#">Comment</a>
       </div>    
       {% endfor %}
       
