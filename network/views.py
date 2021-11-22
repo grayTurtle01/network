@@ -10,8 +10,13 @@ import json
 
 from .models import Follow, User, Post, Like
 
+from django.core.paginator import Paginator
+
 def index(request):
     posts = Post.objects.all().order_by('-timestamp')
+
+    p = Paginator(posts, 2)
+    page1 = p.page(1)
 
     try:
         likes_given = Like.objects.filter(creator=request.user)
@@ -26,7 +31,8 @@ def index(request):
         posts_liked.append(post_id)
 
     return render(request, "network/index.html", {
-                                'posts': posts,
+                                #'posts': posts,
+                                'posts': page1.object_list,
                                 'posts_liked': posts_liked
                             })
 
@@ -226,7 +232,35 @@ def like_unlike(request):
         post.save()
         return JsonResponse({'likes': post.likes,
                              'message': "Like added"})
-       
+
+
+def render_page_number(request, page_number):
+    posts = Post.objects.all().order_by('-timestamp')
+
+    p = Paginator(posts, 2)
+    page1 = p.page(page_number)
+    pages = p.num_pages
+
+    try:
+        likes_given = Like.objects.filter(creator=request.user)
+    
+    # Anonymus user
+    except:
+        likes_given = []
+
+    posts_liked = []
+    for like in likes_given:
+        post_id = like.post_id
+        posts_liked.append(post_id)
+
+    return render(request, "network/index.html", {
+                                #'posts': posts,
+                                'posts': page1.object_list,
+                                'posts_liked': posts_liked,
+                                'pages': pages,
+                                'range': p.page_range
+                            })    
+
 
     
 

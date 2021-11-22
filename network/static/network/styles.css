@@ -6,3 +6,11 @@
   width: 350px;
   padding: 5px;
 }
+
+.post a {
+  color: black;
+}
+
+.pagination{
+  margin: 0 30vw;
+}
