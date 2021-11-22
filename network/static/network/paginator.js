@@ -13,6 +13,7 @@ else{
   boton = page_buttons[current_page-1]
   boton.className += ' active'
 
+  // update next-button state
   next = document.querySelector('.next')
   if( current_page < pages ){
     next_page = parseInt(current_page) + 1
@@ -20,6 +21,16 @@ else{
   }
   else{
     next.href = `/render_page_number/${pages}`
+  }
+
+  // update prvious-button state
+  prev = document.querySelector('.previous')
+  if( current_page > 1 ){
+    prev_page = parseInt(current_page) - 1
+    prev.href = `/render_page_number/${prev_page}`
+  }
+  else{
+    prev.href = `/render_page_number/${1}`
   }
 
 }
@@ -49,6 +60,21 @@ document.querySelector('.next').onclick = () => {
 
   if( current_page < pages){
     localStorage.setItem('current_page', parseInt(current_page) + 1)
+  }
+  else{
+    return false
+  }
+}
+
+// previous button
+document.querySelector('.previous').onclick = () => {
+  current_page = parseInt(localStorage.getItem('current_page'))
+
+  if( current_page > 1){
+    localStorage.setItem('current_page', parseInt(current_page) - 1)
+  }
+  else{
+    return false
   }
 }
 
