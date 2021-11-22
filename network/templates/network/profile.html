@@ -26,7 +26,7 @@
 
       {% for post in posts %}
       <div class="post text-left" data-post_id="{{post.id}}">
-          <a href="{% url 'show_profile' post.creator.id %}"><h4>{{ post.creator }}</h4></a>
+          <a href="{% url 'profile' post.creator.username %}"><h4>{{ post.creator }}</h4></a>
 
           <p>{{ post.message }}</p>
           <textarea style="display: none;"></textarea>

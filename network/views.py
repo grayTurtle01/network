@@ -109,8 +109,9 @@ def addPost(request):
     #return HttpResponse('post added')
     return JsonResponse(new_post)
 
-def show_profile(request, user_id):
-    profile_user = User.objects.get(pk=user_id)
+def profile(request, username):
+    profile_user = User.objects.get(username=username)
+    user_id = profile_user.id
 
     posts = Post.objects.filter(creator=profile_user.id).order_by('-timestamp')
 
