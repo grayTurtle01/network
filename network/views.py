@@ -109,11 +109,14 @@ def addPost(request):
     #return HttpResponse('post added')
     return JsonResponse(new_post)
 
-def profile(request, username):
+def profile(request, username, page_number):
     profile_user = User.objects.get(username=username)
     user_id = profile_user.id
 
     posts = Post.objects.filter(creator=profile_user.id).order_by('-timestamp')
+    p = Paginator(posts, post_by_page)
+    #page_number = 1
+    page = p.page(page_number)
 
     # Follow
     is_followed = False
@@ -140,11 +143,12 @@ def profile(request, username):
     return render(request, 'network/profile.html',{
         'username': profile_user.username,
         'user_id': user_id,
-        'posts': posts,
+        'posts': page.object_list,
         'followers': Follow.objects.filter(target=profile_user.id).count(),
         'following': Follow.objects.filter(creator=profile_user.id).count(),
         'is_followed': is_followed,
-        'posts_liked' : posts_liked
+        'posts_liked' : posts_liked,
+        'range': p.page_range
     })
 
         

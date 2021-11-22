@@ -1,6 +1,8 @@
 {% extends "network/layout.html" %}
 {% load static %}
 
+{% block title%}{{username}}{% endblock %}
+
 {% block body %}
     <h1>{{ username }}</h1>
     <ul>
@@ -26,7 +28,7 @@
 
       {% for post in posts %}
       <div class="post text-left" data-post_id="{{post.id}}">
-          <a href="{% url 'profile' post.creator.username %}"><h4>{{ post.creator }}</h4></a>
+          <a href="{% url 'profile' post.creator.username 1 %}"><h4>{{ post.creator }}</h4></a>
 
           <p>{{ post.message }}</p>
           <textarea style="display: none;"></textarea>
@@ -54,11 +56,25 @@
       </div>    
       {% endfor %}
       
-  </div>
+    </div>
   
+    <nav id="nav-pagination">
+      <ul class="pagination">
+        <li class="page-item">
+            <a class="page-link previous" href="/profile/{{username}}/1">Previous</a>
+      </li>
+        {% for i in range %}
+           <li class="page-item page-number" data-page_number="{{i}}" >
+               <a class="page-link" href="/profile/{{username}}/{{i}}">{{i}}</a>
+          </li>
+        {% endfor%}
+        <li class="page-item">
+            <a class="page-link next" href="/profile/{{username}}/2">Next</a>
+          </li>
+      </ul>
+    </nav> 
     
-    
-    {% endblock %}
+  {% endblock %}
     
 {% block js %}
   {% if user.is_authenticated %}
@@ -68,6 +84,7 @@
       <script src="{% static 'network/edit.js' %}"></script>
       {% endif %}
     <script src="{% static 'network/like_unlike.js' %}"></script>
+    <script src="{% static 'network/paginator_profile.js' %}"></script>
   {% endif %}
 {% endblock %}
 
