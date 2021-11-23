@@ -3,7 +3,7 @@
   border-radius: 5px;
   margin: 10px auto;
 
-  width: 350px;
+  width: 400px;
   padding: 5px;
 }
 
@@ -22,8 +22,18 @@
   color: black;
 }
 
+.post-image{
+  width: 50px;
+  border-radius: 50%;
+}
 
+.post h4{
+  display: inline;
+}
 
+.post:hover{
+  background-color: lightgray;
+}
 #nav-pagination{
   display: inline-block;
  

@@ -6,6 +6,7 @@ from django.db.models.fields.related import ForeignKey
 class User(AbstractUser):
     followers = models.IntegerField(default=0)
     following = models.IntegerField(default=0)
+    image_url = models.CharField(max_length=300, default="https://www.alphr.com/wp-content/uploads/2020/10/twitter.png")
 
 class Post(models.Model):
     creator = models.ForeignKey(User, on_delete=models.CASCADE)

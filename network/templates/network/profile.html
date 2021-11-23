@@ -21,6 +21,8 @@
             Follow
           {% endif %}  
         </button>
+      {% else %}
+        <a href="{% url 'edit_profile' user.username %}" class="btn btn-primary" id="edit_profile" >Edit Profile</a>
       {% endif %}
     {% endif %}
 
@@ -96,9 +98,10 @@
       <script src="{% static 'network/follow_unfollow.js' %}"></script>
     {% else %}
       <script src="{% static 'network/edit.js' %}"></script>
+      <script src="{% static 'network/edit_profile.js' %}"></script>
       {% endif %}
     <script src="{% static 'network/like_unlike.js' %}"></script>
-    {% endif %}
+  {% endif %}
     <script src="{% static 'network/paginator_profile.js' %}"></script>
 {% endblock %}
 

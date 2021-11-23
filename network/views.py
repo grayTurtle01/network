@@ -12,7 +12,7 @@ from .models import Follow, User, Post, Like
 
 from django.core.paginator import Paginator
 
-post_by_page = 2
+post_by_page = 10
 
 def index(request):
     posts = Post.objects.all().order_by('-timestamp')
@@ -289,6 +289,25 @@ def get_posts(request, page_number):
     return JsonResponse({'posts': posts})
 
     
+def edit_profile(request, username):
+    if request.method == "POST":
+        user = User.objects.get(username=username)
 
+        new_username = request.POST["username"]
+        new_email = request.POST["email"]
+        new_image = request.POST['image_url']
+
+        user.username = new_username
+        user.email = new_email
+        user.image_url = new_image
+        user.save()
+       
+        return HttpResponseRedirect(reverse("index"))
+    else:
+        user = User.objects.get(username=username)
+        return render(request, "network/edit_profile.html",{
+            'email': user.email,
+            'image_url': user.image_url
+        })
         
     
