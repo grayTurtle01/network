@@ -3,20 +3,20 @@ let page_buttons = document.querySelectorAll('.page-number')
 let pages = page_buttons.length
 
 // inicial state
-if( localStorage.getItem('current_page') == null){
-  localStorage.setItem('current_page', 1)
+if( localStorage.getItem('current_page_following') == null){
+  localStorage.setItem('current_page_following', 1)
   first = page_buttons[0]
   first.className += ' active'
 }
 else{
-  current_page = parseInt(localStorage.getItem('current_page'))
-  boton = page_buttons[current_page-1]
+  current_page_following = parseInt(localStorage.getItem('current_page_following'))
+  boton = page_buttons[current_page_following-1]
   boton.className += ' active'
 
   // update next-button state
   next = document.querySelector('.next')
-  if( current_page < pages ){
-    next_page = parseInt(current_page) + 1
+  if( current_page_following < pages ){
+    next_page = parseInt(current_page_following) + 1
     next.href = `/following/${next_page}`
   }
   else{
@@ -25,8 +25,8 @@ else{
 
   // update prvious-button state
   prev = document.querySelector('.previous')
-  if( current_page > 1 ){
-    prev_page = parseInt(current_page) - 1
+  if( current_page_following > 1 ){
+    prev_page = parseInt(current_page_following) - 1
     prev.href = `/following/${prev_page}`
   }
   else{
@@ -40,7 +40,7 @@ page_buttons.forEach( button => {
   button.onclick = function(){
     let page_number = this.dataset.page_number
     button.className += ' active'
-    localStorage.setItem('current_page', page_number) 
+    localStorage.setItem('current_page_following', page_number) 
 
     for( btn of page_buttons ){
       if (btn.dataset.page_number != page_number){
@@ -56,10 +56,10 @@ page_buttons.forEach( button => {
 
 // next button
 document.querySelector('.next').onclick = () => {
-  current_page = parseInt(localStorage.getItem('current_page'))
+  current_page_following = parseInt(localStorage.getItem('current_page_following'))
 
-  if( current_page < pages){
-    localStorage.setItem('current_page', parseInt(current_page) + 1)
+  if( current_page_following < pages){
+    localStorage.setItem('current_page_following', parseInt(current_page_following) + 1)
   }
   else{
     return false
@@ -68,10 +68,10 @@ document.querySelector('.next').onclick = () => {
 
 // previous button
 document.querySelector('.previous').onclick = () => {
-  current_page = parseInt(localStorage.getItem('current_page'))
+  current_page_following = parseInt(localStorage.getItem('current_page_following'))
 
-  if( current_page > 1){
-    localStorage.setItem('current_page', parseInt(current_page) - 1)
+  if( current_page_following > 1){
+    localStorage.setItem('current_page_following', parseInt(current_page_following) - 1)
   }
   else{
     return false
