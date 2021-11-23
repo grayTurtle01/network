@@ -1,6 +1,8 @@
 {% extends "network/layout.html" %}
 {% load static %}
 
+{% block title%}Following{% endblock %}
+
 {% block body %}
     <h1>Following</h1>
 
@@ -9,11 +11,17 @@
 
         {% for post in posts %}
         <div class="post text-left" data-post_id="{{post.id}}">
-            <a href="{% url 'profile' post.creator.username 1 %}"><h4>{{ post.creator }}</h4></a>
-            <p>{{ post.message }}</p>
-            <small class='text-secondary'>{{ post.timestamp }}</small>
-            <br>
+            
+            <div class="post-header">
+                <a href="{% url 'profile' post.creator.username 1 %}">
+                    <h4>{{ post.creator }}</h4>
+                </a>
+                <small class='text-secondary'>{{ post.timestamp }}</small>
+            </div>
 
+
+            <p>{{ post.message }}</p>
+           
             {% if user.is_authenticated %}
 
                 {% if post.id in posts_liked %}
@@ -27,7 +35,9 @@
             {% endif %}
             <span class="likes">{{post.likes}}</span> <br>
         
-        </div>    
+        </div> 
+        {% empty %}
+         <h2>Opps! You are not following nobody</h2>   
         {% endfor %}
         
     </div>

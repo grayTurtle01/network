@@ -7,9 +7,22 @@
   padding: 5px;
 }
 
+.post-header{
+  display: flex;
+  justify-content: space-between;
+}
+
+.post-footer{
+  display: flex;
+  justify-content: space-between;
+}
+
+
 .post a {
   color: black;
 }
+
+
 
 #nav-pagination{
   display: inline-block;

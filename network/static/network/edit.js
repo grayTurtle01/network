@@ -6,7 +6,7 @@ for (button of edit_buttons){
       edit_button.style.display = 'none'
       post_id = this.dataset.post_id
 
-      post = this.parentNode
+      post = this.parentNode.parentNode.parentNode
       p = post.querySelector('p')
       message = p.innerText
 

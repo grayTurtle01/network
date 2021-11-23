@@ -13,7 +13,9 @@ document.querySelector('form').onsubmit = () => {
     div = document.createElement('div')
     div.className = 'post text-left'
     div.innerHTML = `
-      <h4>${post.creator }</h4>
+      <a href="/profile/${post.creator}/1">
+        <h4>${post.creator }</h4>
+      </a>
       <p>${ post.message }</p>
       <a class="btn btn-sm btn-info edit"">Edit</a>
       <br>
@@ -23,8 +25,8 @@ document.querySelector('form').onsubmit = () => {
 
       <small class='text-secondary'>${ post.timestamp }</small>
       <br>
-      <span>Likes: ${post.likes }</span> <br>
-      <a href="#">Comment</a> 
+      <i class="fa fa-heart"></i>
+      <span>${post.likes }</span> <br> 
     `
     document.querySelector('#posts').prepend(div)
     document.querySelector('#message').value = ""
