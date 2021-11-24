@@ -12,10 +12,16 @@
         {% for post in posts %}
         <div class="post text-left" data-post_id="{{post.id}}">
             
-            <div class="post-header">
-                <a href="{% url 'profile' post.creator.username 1 %}">
-                    <h4>{{ post.creator }}</h4>
-                </a>
+            <div class="post-header mb-2">
+                
+                <div class="post-header-left">
+
+                    <img class="post-image" src="{{post.creator.image_url}}" >
+                    <a href="{% url 'profile' post.creator.username 1 %}">
+                        <h4>{{ post.creator }}</h4>
+                    </a>
+                </div>
+
                 <small class='text-secondary'>{{ post.timestamp }}</small>
             </div>
 
