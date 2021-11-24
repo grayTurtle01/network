@@ -5,10 +5,15 @@
     <h1>All Posts</h1>
 
     {% if user.is_authenticated %}
-    <form>
-        <input id="message" placeholder="say something" autofocus required>
-        <button>POST</button>
-    </form>
+    <div style="margin: auto; display: inline-block;">
+
+        <form  class="d-flex justify-content-around" style="width: 400px;">
+            <textarea id="message" placeholder="say something" autofocus required
+            class="form-control"></textarea>   
+            
+            <button class="btn btn-primary" id="post-button">POST</button>
+        </form>
+    </div>
     {% endif %}
 
     <div id="posts">

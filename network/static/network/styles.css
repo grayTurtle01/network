@@ -1,3 +1,14 @@
+#message{
+  width: 300px;
+  display: inline-block;
+  height: 60px;
+}
+
+#post-button{
+  height: 60px;
+  display: inline-block;
+}
+
 .post{
   border: 1px solid black;
   border-radius: 5px;
@@ -34,6 +45,9 @@
 .post:hover{
   background-color: lightgray;
 }
+
+
+
 #nav-pagination{
   display: inline-block;
  
