@@ -60,17 +60,21 @@
 
     <nav id="nav-pagination">
         <ul class="pagination">
+
           <li class="page-item">
-              <a class="page-link previous" href="/render_page_number/1">Previous</a>
-        </li>
+              <a class="page-link previous" href="/feed/1">Previous</a>
+          </li>
+
           {% for i in range %}
              <li class="page-item page-number" data-page_number="{{i}}" >
-                 <a class="page-link" href="/render_page_number/{{i}}">{{i}}</a>
+                 <a class="page-link" href="/feed/{{i}}">{{i}}</a>
             </li>
           {% endfor%}
+
           <li class="page-item">
-              <a class="page-link next" href="/render_page_number/2">Next</a>
-            </li>
+              <a class="page-link next" href="/feed/2">Next</a>
+          </li>
+
         </ul>
       </nav>
 
@@ -79,7 +83,7 @@
 
 {% block js%}    
     {% if user.is_authenticated %}
-        <script src="{% static 'network/main.js' %}"></script>
+        <script src="{% static 'network/post.js' %}"></script>
         <script src="{% static 'network/like_unlike.js' %}"></script>
     {% endif %}
         

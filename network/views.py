@@ -251,7 +251,7 @@ def like_unlike(request):
                              'message': "Like added"})
 
 
-def render_page_number(request, page_number):
+def feed(request, page_number):
     posts = Post.objects.all().order_by('-timestamp')
 
     p = Paginator(posts, post_by_page)

@@ -7,6 +7,7 @@ if( localStorage.getItem('current_page') == null){
   localStorage.setItem('current_page', 1)
   first = page_buttons[0]
   first.className += ' active'
+  document.querySelector('.previous').className + ' disabled'
 }
 else{
   current_page = parseInt(localStorage.getItem('current_page'))
@@ -17,20 +18,24 @@ else{
   next = document.querySelector('.next')
   if( current_page < pages ){
     next_page = parseInt(current_page) + 1
-    next.href = `/render_page_number/${next_page}`
+    next.href = `/feed/${next_page}`
   }
   else{
-    next.href = `/render_page_number/${pages}`
+    next.href = `/feed/${pages}`
+    let li = next.parentNode 
+    li.className += ' disabled'
   }
 
   // update prvious-button state
   prev = document.querySelector('.previous')
   if( current_page > 1 ){
     prev_page = parseInt(current_page) - 1
-    prev.href = `/render_page_number/${prev_page}`
+    prev.href = `/feed/${prev_page}`
   }
   else{
-    prev.href = `/render_page_number/${1}`
+    prev.href = `/feed/${1}`
+    let li = prev.parentNode 
+    li.className += ' disabled'
   }
 
 }
