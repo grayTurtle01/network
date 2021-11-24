@@ -46,6 +46,9 @@
   background-color: lightgray;
 }
 
+.edit-area{
+  width: 350px;
+}
 
 
 #nav-pagination{

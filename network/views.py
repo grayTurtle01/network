@@ -103,8 +103,11 @@ def addPost(request):
         'creator': post.creator.username,
         'message': message,
         'timestamp': post.timestamp,
-        'likes': 0
+        'likes': 0,
+        'creator_image': request.user.image_url
     }
+
+    new_post = post.serialize()
 
     #return HttpResponse('post added')
     return JsonResponse(new_post)

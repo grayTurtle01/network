@@ -8,6 +8,15 @@ class User(AbstractUser):
     following = models.IntegerField(default=0)
     image_url = models.CharField(max_length=300, default="https://www.alphr.com/wp-content/uploads/2020/10/twitter.png")
 
+    def serialize(self):
+        return{
+            'id': self.id,
+            'username': self.username,
+            'followers': self.followers,
+            'following': self.following,
+            'image_url': self.image_url
+        }
+
 class Post(models.Model):
     creator = models.ForeignKey(User, on_delete=models.CASCADE)
     message = models.CharField(max_length=128)
@@ -20,10 +29,11 @@ class Post(models.Model):
     def serialize(self):
         return{
             'id': self.id,
-            'creator': self.creator,
+            'creator': self.creator.username,
             'message': self.message,
-            'timestamp': self.timestamp,
-            'likes': self.likes
+            'timestamp': self.timestamp.strftime("%b %d %Y, %I:%M %p"),
+            'likes': self.likes,
+            'creator_image': self.creator.image_url
         }
         
 class Follow(models.Model):
