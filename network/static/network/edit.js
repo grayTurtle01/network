@@ -4,6 +4,11 @@ for (button of edit_buttons){
 
       edit_button = this
       edit_button.style.display = 'none'
+
+      document.querySelectorAll('.edit').forEach( btn => {
+        btn.style.display = 'none'
+      })
+
       post_id = this.dataset.post_id
 
       post = this.parentNode.parentNode.parentNode
@@ -40,6 +45,11 @@ for (button of edit_buttons){
           this.style.display = 'none'
           edit_button.style.display = 'inline-block'
           p.style.display = 'block'
+
+
+          document.querySelectorAll('.edit').forEach( btn => {
+            btn.style.display = 'inline-block'
+          })
         })  
       }   
       
