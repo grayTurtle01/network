@@ -151,7 +151,8 @@ def profile(request, username, page_number):
         'following': Follow.objects.filter(creator=profile_user.id).count(),
         'is_followed': is_followed,
         'posts_liked' : posts_liked,
-        'range': p.page_range
+        'range': p.page_range,
+        'profile_user': profile_user
     })
 
         

@@ -4,27 +4,50 @@
 {% block title%}{{username}}{% endblock %}
 
 {% block body %}
-    <h1>{{ username }}</h1>
-    <ul>
-      <li >Followers: <span id="followers">{{followers}}</span></li>
-      <li>Following: {{following}}</li>
-    </ul>
+    <div class="profile">
 
-    {% if user.is_authenticated %}
-      {% if user.username != username %}
-        <button id="follow_unfollow" 
-          data-profile_id="{{user_id}}" 
-          class="btn btn-md btn-dark rounded-pill" style="width: 100px;">
-          {% if is_followed %}
+      <img src="{{profile_user.image_url}}" class="profile-image" >
+      
+
+      <h2 class="profile-username">{{ username }}</h2>
+     
+      <div class="profile-footer">
+        
+        <div class="profile-footer-left">
+          <div class="profile-followers">
+            <span id="followers">{{followers}}</span> Followers 
+          </div>
+          {{following}} Following
+        </div>
+
+        <div class="profile-footer-righ">
+
+          {% if user.is_authenticated %}
+            {% if user.username != username %}
+            <button id="follow_unfollow" 
+            data-profile_id="{{user_id}}" 
+            class="btn btn-sm btn-dark rounded-pill" style="width: 100px;">
+            {% if is_followed %}
             Unfollow
-          {% else %}
+            {% else %}
             Follow
-          {% endif %}  
-        </button>
-      {% else %}
-        <a href="{% url 'edit_profile' user.username %}" class="btn btn-primary" id="edit_profile" >Edit Profile</a>
-      {% endif %}
-    {% endif %}
+            {% endif %}  
+          </button>
+          {% else %}
+          <a href="{% url 'edit_profile' user.username %}" class="btn  btn-sm btn-primary rounded-pill" id="edit_profile" >Edit Profile</a>
+          {% endif %}
+        {% endif %}
+      </div>
+        
+        
+      </div>
+
+
+      
+      
+    </div>
+
+    
 
     <div id="posts">
 
