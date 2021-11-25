@@ -26,7 +26,7 @@ document.querySelector('form').onsubmit = () => {
       <small class='text-secondary'>${post.timestamp }</small>
    </div>
 
-      <p>${post.message}</p>      
+      <p class="ml-2">${post.message}</p>      
       <textarea style="display: none;"></textarea>
       <button style="display: none;" class="btn btn-sm btn-info mt-1">Update</button>
 

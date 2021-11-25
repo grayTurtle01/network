@@ -94,3 +94,16 @@
 .profile-followers{
   margin-right: 15px;
 }
+
+.mycard{
+  border: 2px solid black;
+  border-radius: 20px;
+  width: 360px;
+  margin: 0 auto;
+  padding: 30px 40px;
+  text-align: center;
+  margin-top: 10vh;
+
+  box-shadow: 4px 4px ;
+
+}

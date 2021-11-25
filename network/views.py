@@ -33,7 +33,6 @@ def index(request):
         posts_liked.append(post_id)
 
     return render(request, "network/index.html", {
-                                #'posts': posts,
                                 'posts': page1.object_list,
                                 'posts_liked': posts_liked,
                                 'range': p.page_range
@@ -99,17 +98,8 @@ def addPost(request):
     post = Post.objects.create(creator=request.user, message=message)
     post.save()
 
-    new_post = {
-        'creator': post.creator.username,
-        'message': message,
-        'timestamp': post.timestamp,
-        'likes': 0,
-        'creator_image': request.user.image_url
-    }
-
     new_post = post.serialize()
 
-    #return HttpResponse('post added')
     return JsonResponse(new_post)
 
 def profile(request, username, page_number):
@@ -118,7 +108,8 @@ def profile(request, username, page_number):
 
     posts = Post.objects.filter(creator=profile_user.id).order_by('-timestamp')
     p = Paginator(posts, post_by_page)
-    #page_number = 1
+    
+
     page = p.page(page_number)
 
     # Follow
@@ -131,6 +122,7 @@ def profile(request, username, page_number):
 
     except:
         is_followed = False
+
 
     # Likes
     try:
