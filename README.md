@@ -8,3 +8,7 @@ A social network like Twitter
 [Video](https://youtu.be/N0WRVODsS3Q) 🎥
 
 [Deploy](https://micro-tuitter.herokuapp.com) 🚀
+
+## Setup
+Python>3.6
+`git clone `
