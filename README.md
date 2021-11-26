@@ -11,4 +11,13 @@ A social network like Twitter
 
 ## Setup
 Python>3.6
-`git clone `
+
+`git clone https://github.com/grayTurtle01/network.git`
+
+`cd network`
+
+`pip install -r requirements.txt`
+
+`python3 manage.py runserver`
+
+`localhost:8000`
