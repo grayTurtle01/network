@@ -6,6 +6,7 @@ from django.shortcuts import render
 from django.urls import reverse
 
 from django.views.decorators.csrf import csrf_exempt
+from django.contrib.auth.decorators import login_required
 import json
 
 from .models import Follow, User, Post, Like
@@ -58,7 +59,7 @@ def login_view(request):
     else:
         return render(request, "network/login.html")
 
-
+@login_required(login_url='login')
 def logout_view(request):
     logout(request)
     return HttpResponseRedirect(reverse("index"))
@@ -91,6 +92,7 @@ def register(request):
         return render(request, "network/register.html")
 
 @csrf_exempt
+@login_required(login_url='login')
 def addPost(request):
     payload = json.loads(request.body)
     message = payload['message']
@@ -147,7 +149,7 @@ def profile(request, username, page_number):
         'profile_user': profile_user
     })
 
-        
+@login_required(login_url='login')        
 def follow_unfollow(request, user_id):
    
     # Unfollow
@@ -170,6 +172,7 @@ def follow_unfollow(request, user_id):
             'message': 'follow'
         })
 
+@login_required(login_url='login')
 def following(request, page_number):
     
     follows = Follow.objects.filter(creator=request.user)
@@ -202,6 +205,7 @@ def following(request, page_number):
     })
 
 @csrf_exempt
+@login_required(login_url='login')
 def update_post(request):
     payload = json.loads(request.body)
 
@@ -284,7 +288,7 @@ def get_posts(request, page_number):
 
     return JsonResponse({'posts': posts})
 
-    
+@login_required(login_url='login')
 def edit_profile(request, username):
     if request.method == "POST":
         user = User.objects.get(username=username)
