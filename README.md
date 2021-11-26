@@ -7,4 +7,4 @@ A social network like Twitter
 ## Demos 🖥️
 [Video](https://youtu.be/N0WRVODsS3Q) 🎥
 
-[Deploy](micro-tuitter.herokuapp.com) 🚀
+[Deploy](https://micro-tuitter.herokuapp.com) 🚀
