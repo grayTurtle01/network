@@ -14,6 +14,13 @@ document.querySelector('form').onsubmit = () => {
     let post_node = create_post_node(post)
 
     document.querySelector('#posts').prepend(post_node)
+
+    // Hide the last post when the post are more than 10
+    let posts = document.querySelector('#posts')
+    if(posts.childElementCount > 10)
+      posts.removeChild(posts.lastElementChild)
+
+
     document.querySelector('#message').value = ""
     load_likes()
     load_edit_buttons()
