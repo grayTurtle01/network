@@ -65,8 +65,7 @@
           </div>
 
           <small class='text-secondary'>{{ post.timestamp }}</small>
-      </div>
-
+        </div>
 
           <p>{{ post.message }}</p>
           <textarea style="display: none;" class="edit-area form-control"></textarea>
@@ -78,22 +77,23 @@
               
               {% if user.is_authenticated %}
               
-              {% if post.id in posts_liked %}
-              <i class="fa fa-heart like" style="color:red"></i>    
-              {% else %}    
-              <i class="fa fa-heart like" style="color:black"></i>    
-              {% endif %}
+                  {% if post.id in posts_liked %}
+                    <i class="fa fa-heart like" style="color:red"></i>    
+                  {% else %}    
+                    <i class="fa fa-heart like" style="color:black"></i>    
+                  {% endif %}
               
               {% else %}
-              <i class="fa fa-heart like" style="color:black"></i>   
+                  <i class="fa fa-heart like" style="color:black"></i>   
+
               {% endif %}
-              <span class="likes">{{post.likes }}</span>
+                <span class="likes">{{post.likes }}</span>
             </div>
             
             <div class="edit-div">
               
               {% if post.creator == user %}
-              <a class="btn btn-sm btn-info edit" data-post_id="{{post.id}}">Edit</a>
+                  <a class="btn btn-sm btn-info edit" data-post_id="{{post.id}}">Edit</a>
               {% endif %}
             </div>
           </div>

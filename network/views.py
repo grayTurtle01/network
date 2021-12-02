@@ -21,6 +21,7 @@ def index(request):
     p = Paginator(posts, post_by_page)
     page1 = p.page(1)
 
+    # User's likes given
     try:
         likes_given = Like.objects.filter(creator=request.user)
     
