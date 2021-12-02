@@ -7,15 +7,45 @@ function render_posts(posts){
   }
 }
 
-fetch("/get_posts/1" )
+function fetch_posts(page_number){
+  fetch(`/get_posts/${page_number}` )
   .then( res => res.json())
   .then( data => {
     let posts = data.posts
-    console.log(posts)
     render_posts(posts)
+    update_edit_buttons(data.user)
+    return data.posts_liked
   })
-  .then( ()=> {
+  .then( (posts_liked)=> {
+    update_likes_states(posts_liked)
     load_likes()
     load_edit_buttons()
   })
-  .catch(err => console.log(err))
+  .catch(err => console.log(err))  
+}
+
+function update_likes_states(posts_liked){
+  let likes = document.querySelectorAll('.like')
+  for( let like of likes){
+    let post_id = parseInt(like.parentNode.dataset.post_id)
+    if(  posts_liked.indexOf(post_id) != -1 ){
+        like.style.color = 'red'
+       
+    }
+  }
+}
+
+function update_edit_buttons(user){
+  let posts = document.querySelectorAll('.post')
+
+  for( let post of posts){
+    let creator = post.querySelector('h4').innerText
+    if(  creator != user ){
+        let btn = post.querySelector('.edit')
+        btn.style.display = 'none'
+       
+    }
+  }
+}
+
+fetch_posts(1)

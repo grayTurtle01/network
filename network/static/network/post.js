@@ -43,7 +43,7 @@ function create_post_node(post_data){
 
       <img class="post-image" src="${post.creator_image}" >
       <a href="/profile/${post.creator}/1">
-          <h4>${ post.creator }</h4>
+          <h4>${post.creator}</h4>
       </a>
     </div>
 

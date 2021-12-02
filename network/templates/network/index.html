@@ -17,7 +17,7 @@
     {% endif %}
 
 
-    {% include 'network/render_posts.html' %}
+    <div id="posts"></div>
 
     <nav id="nav-pagination">
         <ul class="pagination">
@@ -48,8 +48,9 @@
     <script src="{% static 'network/like_unlike.js' %}"></script>
     <script src="{% static 'network/edit_post.js' %}"></script>
     <script src="{% static 'network/post.js' %}"></script>
+    <script src="{% static 'network/render_posts.js' %}"></script>
     {% endif %}
         
-    <script src="{% static 'network/paginator.js' %}"></script>
+    
 {% endblock %}
     
