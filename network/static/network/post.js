@@ -30,16 +30,21 @@ document.querySelector('form').onsubmit = () => {
       <textarea class="form-control" style="display: none;" ></textarea>
       <button style="display: none;" class="btn btn-sm btn-info mt-1">Update</button>
 
-      <div class="footer>
+      <div class="post-footer">
         <div class="likes-div" data-post_id="${post.id}">
           <i class="fa fa-heart like"></i>
           <span class="likes">${post.likes }</span> <br> 
         </div>
+
+        <div class="edit-div">
+            <a class="btn btn-sm btn-info edit" data-post_id="${post.id}">Edit</a>
+      </div>
       </div>
     `
     document.querySelector('#posts').prepend(div)
     document.querySelector('#message').value = ""
     load_likes()
+    load_edit_buttons()
   })
   
 
