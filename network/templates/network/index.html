@@ -45,9 +45,9 @@
 {% block js%}  
 
     {% if user.is_authenticated %}
-        <script src="{% static 'network/post.js' %}"></script>
-        <script src="{% static 'network/like_unlike.js' %}"></script>
-        <script src="{% static 'network/edit_post.js' %}"></script>
+    <script src="{% static 'network/like_unlike.js' %}"></script>
+    <script src="{% static 'network/edit_post.js' %}"></script>
+    <script src="{% static 'network/post.js' %}"></script>
     {% endif %}
         
     <script src="{% static 'network/paginator.js' %}"></script>
