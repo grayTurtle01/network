@@ -17,9 +17,14 @@ function fetch_posts(page_number){
     return data.posts_liked
   })
   .then( (posts_liked)=> {
-    update_likes_states(posts_liked)
-    load_likes()
-    load_edit_buttons()
+
+    // if isn't anonymus user
+    if( posts_liked.length > 0 ){
+
+      update_likes_states(posts_liked)
+      load_likes_buttons()
+      load_edit_buttons()
+    }
   })
   .catch(err => console.log(err))  
 }

@@ -43,13 +43,14 @@
 
 
 {% block js%}  
+    <script src="{% static 'network/helpers.js' %}"></script>
 
     {% if user.is_authenticated %}
     <script src="{% static 'network/like_unlike.js' %}"></script>
     <script src="{% static 'network/edit_post.js' %}"></script>
-    <script src="{% static 'network/post.js' %}"></script>
-    <script src="{% static 'network/render_posts.js' %}"></script>
+    <script src="{% static 'network/add_new_post.js' %}"></script>
     {% endif %}
+    <script src="{% static 'network/render_posts.js' %}"></script>
         
     
 {% endblock %}

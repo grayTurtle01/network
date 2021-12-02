@@ -1,11 +1,10 @@
 
-function load_likes(){
+function load_likes_buttons(){
   like_buttons = document.querySelectorAll('.like')
   for( like_btn of like_buttons ){
     like_btn.onclick = function(){
       post = this.parentNode
       post_id = post.dataset.post_id
-      console.log(post_id)
       
       fetch("/like_unlike",{
         method: 'PUT',
@@ -29,4 +28,4 @@ function load_likes(){
     }
   }
 }
-load_likes()
+load_likes_buttons()
