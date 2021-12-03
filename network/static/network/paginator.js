@@ -18,10 +18,12 @@ else{
   next = document.querySelector('.next')
   if( current_page < pages ){
     next_page = parseInt(current_page) + 1
-    next.href = `/feed/${next_page}`
+     next.href = `/feed/${next_page}`
+    //next.onclick = `fetch_posts(${next_page})`
   }
   else{
     next.href = `/feed/${pages}`
+    //next.onclick = `fetch_posts(${page})`
     let li = next.parentNode 
     li.className += ' disabled'
   }

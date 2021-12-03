@@ -1,36 +1,3 @@
-document.querySelector('form').onsubmit = () => {
-  let message = document.querySelector('#message').value
-  
-  fetch("/addPost", {
-    method: 'POST',
-    body: JSON.stringify({
-      'message': message
-    })
-  })
-  
-  .then( res => res.json())
-  .then( post => {
-
-    let post_node = create_post_node(post)
-
-    document.querySelector('#posts').prepend(post_node)
-
-    // Hide the last post when the post are more than 10
-    let posts = document.querySelector('#posts')
-    if(posts.childElementCount > 10)
-      posts.removeChild(posts.lastElementChild)
-
-
-    document.querySelector('#message').value = ""
-    load_likes()
-    load_edit_buttons()
-  })
-  
-
-
-  return false
-}
-
 function create_post_node(post_data){
   let post = post_data
 
@@ -43,7 +10,7 @@ function create_post_node(post_data){
 
       <img class="post-image" src="${post.creator_image}" >
       <a href="/profile/${post.creator}/1">
-          <h4>${ post.creator }</h4>
+          <h4>${post.creator}</h4>
       </a>
     </div>
 

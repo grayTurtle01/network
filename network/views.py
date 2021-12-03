@@ -287,7 +287,28 @@ def get_posts(request, page_number):
 
     posts = list(page.object_list)
 
-    return JsonResponse({'posts': posts})
+    #### Posts
+    posts_serialized = []
+    for post in posts:
+        posts_serialized.append( post.serialize())
+
+
+    #### Likes
+    try:
+        likes_given = Like.objects.filter(creator=request.user)
+    
+    # Anonymus user
+    except:
+        likes_given = []
+
+    posts_liked = []
+    for like in likes_given:
+        post_id = like.post_id
+        posts_liked.append(post_id)
+
+    return JsonResponse({'posts': posts_serialized,
+                         'posts_liked': posts_liked,
+                         'user':request.user.username})
 
 @login_required(login_url='login')
 def edit_profile(request, username):

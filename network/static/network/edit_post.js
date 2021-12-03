@@ -1,14 +1,21 @@
 function load_edit_buttons(){
   edit_buttons = document.querySelectorAll('.edit')
-  for (button of edit_buttons){
+  for( button of edit_buttons ){
       button.onclick = function(){
 
         edit_button = this
         edit_button.style.display = 'none'
 
+        let user_edit_buttons = []
         document.querySelectorAll('.edit').forEach( btn => {
+          post_id = btn.dataset.post_id
+          
+          if(btn.style.display != 'none')
+            user_edit_buttons.push(post_id)
+
           btn.style.display = 'none'
         })
+ 
 
         post_id = this.dataset.post_id
 
@@ -49,7 +56,9 @@ function load_edit_buttons(){
 
 
             document.querySelectorAll('.edit').forEach( btn => {
-              btn.style.display = 'inline-block'
+              post_id = btn.dataset.post_id
+              if( user_edit_buttons.indexOf(post_id) != -1)
+                btn.style.display = 'inline-block'
             })
           })  
         }   
