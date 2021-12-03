@@ -13,7 +13,7 @@ from .models import Follow, User, Post, Like
 
 from django.core.paginator import Paginator
 
-post_by_page = 2
+post_by_page = 10
 
 def index(request):
     posts = Post.objects.all().order_by('-timestamp')
