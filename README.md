@@ -5,7 +5,7 @@ A social network like Twitter
 ![Network ScreenShot](https://res.cloudinary.com/dqxtoises/image/upload/v1637938469/network_fnf3at.png)
 
 ## Demos 🖥️
-[Video](https://youtu.be/N0WRVODsS3Q) 🎥
+[Video](https://youtu.be/tj026M3EW7U) 🎥
 
 [Deploy](https://micro-tuitter.herokuapp.com) 🚀
 
