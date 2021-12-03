@@ -22,7 +22,7 @@ document.querySelector('form').onsubmit = () => {
 
 
     document.querySelector('#message').value = ""
-    load_likes()
+    load_likes_buttons()
     load_edit_buttons()
   })
   
