@@ -24,6 +24,8 @@ else{
     }
     else{
       next.href = `/following/${pages}`
+      li_next = next.parentNode
+      li_next.classList.add('disabled')
     }
     
     // update prvious-button state
@@ -31,6 +33,10 @@ else{
     if( current_page_following > 1 ){
       prev_page = parseInt(current_page_following) - 1
       prev.href = `/following/${prev_page}`
+
+      prev_li = prev.parentNode
+      prev_li.classList.remove('disabled')  
+
     }
     else{
       prev.href = `/following/${1}`
