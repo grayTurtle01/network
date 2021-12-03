@@ -3,6 +3,11 @@ let page_index = 1
 let page_buttons = document.querySelectorAll('.page-number')
 let pages = page_buttons.length
 
+if( pages < 2){
+  let paginator = document.querySelector('#nav-pagination')
+  paginator.style.display = 'none'
+}
+
 let current_btn = page_buttons[0]
 current_btn.classList.add('active')
 
@@ -14,9 +19,7 @@ for( btn of page_buttons ){
     page_index = this.dataset.page_number
 
     current_btn = this
-
-    console.log(page_index)
-    
+ 
     update_border_buttons()
   }
 }

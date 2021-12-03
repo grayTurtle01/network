@@ -15,8 +15,7 @@ function load_edit_buttons(){
 
           btn.style.display = 'none'
         })
-
-        console.log(user_edit_buttons)  
+ 
 
         post_id = this.dataset.post_id
 
